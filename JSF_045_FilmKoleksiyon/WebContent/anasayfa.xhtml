@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+      
+      <h:head>
+      <title>JSF_045_FilmKoleksiyon</title>
+ 
+      <h:outputStylesheet library="css" name="style.css"/>
+      <h:outputStylesheet library="css" name="buttonStyle.css"/>
+      </h:head>
+      
+      
+      <h:body>
+      
+      <h:form>
+      				<!-- ////////////////////  FİLM EKLE ////////////////////// -->
+      <h:panelGrid columns="5" border="1">
+      
+      <f:facet name="header">FİLM EKLE</f:facet>
+     
+      <h:outputText value="Film Adı" />
+      <h:outputText value="Yayı Yılı" />
+      <h:outputText value="Film Türü" />
+      <h:outputText value="Açıklama" />
+      <h:outputText value="Medya" />
+      
+      <h:inputText value="#{filmBean.filAdi}" />
+      <h:inputText value="#{filmBean.yayinYili}" />
+      <h:inputText value="#{filmBean.filmTur}" />
+      <h:inputText value="#{filmBean.aciklama}" />
+      <h:inputText value="#{filmBean.medya}" />
+      
+      <f:facet name="footer">
+      <h:commandButton action="#{filmBean.FilmEkle()}" value="FİLM EKLE" />
+      </f:facet>
+      
+      </h:panelGrid>
+      
+      
+      
+    				 <!-- ////////////////  LİSTELEME - ARAMA KISMI //////////////////////// -->
+    				 
+    	<h:panelGrid columns="2">
+    	<h:outputText value="Film Adı" />
+    	<h:inputText value="#{filmBean.filAdi}" />
+    	<h:outputText value="Film Türü" />
+    	<h:inputText value="#{filmBean.filmTur}" />
+    	
+    	<f:facet name="footer">
+    	<h:panelGroup>
+    	<h:commandButton styleClass="button buttonKirmizi" action="#{filmBean.filmListele()}" value="TÜM FILMLER"/>
+     	<h:commandButton styleClass="button buttonKirmizi" action="#{filmBean.ismeGoreAra()}" value="ISME GORE ARA"/>
+     	<h:commandButton styleClass="button buttonKirmizi" action="#{filmBean.tureGoreAra()}" value="TURE GORE ARA"/>
+    	</h:panelGroup>
+    	</f:facet>
+    	</h:panelGrid>			 
+      
+      
+      		
+      		<!-- ////////////////  DATATABLE - TUM FILMLER //////////////////////// -->
+      		
+      <h:dataTable value="#{filmBean.filmler()}" 
+      				var="f"
+      				styleClass="table"
+      				headerClass="table-head"
+      				rowClasses="table-tekSatir, table-ciftSatir">
+      
+      <h:column >
+      <f:facet name="header">FİLM ID</f:facet>
+      <h:outputText value="#{f.filmId}" />
+      </h:column>
+      
+      <h:column>
+      <f:facet name="header">FİLM ADI</f:facet>
+      <h:outputText value="#{f.filAdi}" />
+      </h:column>
+      
+      <h:column>
+      <f:facet name="header">TÜRÜ</f:facet>
+      <h:outputText value="#{f.filmTur}" />
+      </h:column>
+      
+      <h:column>
+      <f:facet name="header">SİL</f:facet>
+      <h:commandButton action="#{filmBean.filmSil(f.filmId)}" value="SİL" />
+      </h:column>
+      
+      <h:column>
+      <f:facet name="header">DÜZENLE</f:facet>
+      <h:commandButton action="#{filmBean.filmDuzenleSayfasi(f)}" value="DÜZENLE" />
+      </h:column>
+      
+      <h:column>
+      <f:facet name="header">DETAY</f:facet>
+      <h:commandButton action="#{filmBean.filmDetay(f)}" value="DETAY" />
+      </h:column>
+      
+      </h:dataTable>
+      
+      					<!-- ////////////////  DETAY KISMI //////////////////////// -->
+      <h:panelGrid columns="2" rendered="false">
+      <h:outputText value="FİLM ID: " />
+      <h:outputLabel value="#{filmBean.filmId}" /> 
+      <h:outputText value="FİLM ADI: " />
+      <h:outputLabel value="#{filmBean.filAdi}" />
+      <h:outputText value="FİLM TÜRÜ: " />
+      <h:outputLabel value="#{filmBean.filmTur}" />
+      <h:outputText value="YAYIN YILI: " />
+      <h:outputLabel value="#{filmBean.yayinYili}" />
+      <h:outputText value="MEDYA: " />
+      <h:outputLabel value="#{filmBean.medya}" />
+      <h:outputText value="AÇIKLAMA: " />
+      <h:outputLabel value="#{filmBean.aciklama}" />
+      <h:outputLabel value="OYUNCULAR: " />
+      <h:outputLabel value="" />
+      </h:panelGrid>
+      		
+      </h:form>
+      
+      
+      
+      </h:body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+      
+      <h:head>
+      <title>JSF_045_FilmKoleksiyon</title>
+      </h:head>
+      <h:body>
+      
+      <h:form>
+      
+      <h:panelGrid columns="3">
+      <f:facet name="header">ÜYE GİRİŞİ</f:facet>
+      <h:outputText value="Kullanıcı Adı" />
+      <h:inputText id="txtKulAdi" value="#{kullaniciBean.kulAdi}" validatorMessage="Kullanıcı Adını giriniz.">
+      <f:validateRequired/>
+      </h:inputText>
+      <h:message for="txtKulAdi" style="color:red"/>
+      
+      <h:outputText value="Parola" />
+      <h:inputSecret id="txtParola" value="#{kullaniciBean.parola}" validatorMessage="Parola giriniz." redisplay="true">
+      <f:validateRequired/>
+      </h:inputSecret>
+      <h:message for="txtParola" style="color:red"/>
+      
+      <f:facet name="footer"><h:commandButton action="#{kullaniciBean.girisYap()}" value="GİRİŞ YAP" /> </f:facet>
+      
+      </h:panelGrid>
+      
+      </h:form>
+      
+      <br/>
+      <hr/>
+      <br/>
+      
+      <h:form>
+      
+      <h:panelGrid columns="3">
+      <f:facet name="header">KAYIT OL</f:facet>
+      <h:outputText value="Kullanıcı Adı" />
+      <h:inputText id="KulAdi" value="#{kullaniciBean.kulAdi}" validatorMessage="Kullanıcı Adını giriniz.">
+      <f:validateRequired/>
+      </h:inputText>
+      <h:message for="KulAdi" style="color:red"/>
+      
+      <h:outputText value="Parola" />
+      <h:inputSecret id="Parola" value="#{kullaniciBean.parola}" validatorMessage="Parola giriniz." redisplay="true">
+      <f:validateRequired/>
+      </h:inputSecret>
+      <h:message for="Parola" style="color:red"/>
+      
+      <f:facet name="footer"><h:commandButton action="#{kullaniciBean.kayitEkle()}" value="KAYIT OL" /> </f:facet>
+      
+      </h:panelGrid>
+      
+      </h:form>
+      </h:body>
+</html>

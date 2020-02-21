@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+ 
+ <navigation-rule>
+  <display-name>GİRİS SAYFASI</display-name>
+  <from-view-id>/index.xhtml</from-view-id>
+  
+  <navigation-case>
+   <from-action>#{kullaniciBean.girisYap()}</from-action>
+   <from-outcome>girisBasarili</from-outcome>
+   <to-view-id>/anasayfa.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-action>#{kullaniciBean.girisYap()}</from-action>
+   <from-outcome>girisBasarisiz</from-outcome>
+   <to-view-id>/index.xhtml</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ 
+ 
+ <navigation-rule>
+  <display-name>DUZENLEME SAYFASI</display-name>
+  <from-view-id>/duzenle.xhtml</from-view-id>
+  
+  <navigation-case>
+   <from-action>#{filmBean.filmDuzenle()}</from-action>
+   <from-outcome>guncellemeBasarili</from-outcome>
+   <to-view-id>/anasayfa.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-action>#{filmBean.filmDuzenle()}</from-action>
+   <from-outcome>guncellemeBasarisiz</from-outcome>
+   <to-view-id>/duzenle.xhtml</to-view-id>
+  </navigation-case>
+  
+ </navigation-rule>
+ 
+ 
+ <application/>
+</faces-config>

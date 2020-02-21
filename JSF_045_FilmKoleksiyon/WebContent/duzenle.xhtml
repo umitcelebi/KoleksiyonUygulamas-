@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+      
+      <h:head>
+      <title>JSF_045_FilmKoleksiyon</title>
+      </h:head>
+      <h:body>
+      
+      <h:form>
+      
+      <h:panelGrid columns="3" border="1">
+      
+      
+      <h:outputText value="FILM ID" />
+      <h:outputText value="#{filmBean.filmId}" />
+      <h:inputHidden/>
+      
+      <h:outputText value="FİLM ADI" />
+      <h:inputText id="filmAdi" value="#{filmBean.filAdi}" validatorMessage="film adı girin.">
+      <f:validateRequired/>
+      </h:inputText>
+      <h:message for="filmAdi" style="color:red"/>
+      
+      <h:outputText value="FİLM TÜRÜ" />
+      <h:inputText id="filmTuru" value="#{filmBean.filmTur}" validatorMessage="film türü girin.">
+      <f:validateRequired/>
+      </h:inputText>
+      <h:message for="filmTuru" style="color:red"/>
+      
+      <h:outputText value="YAYIN YILI" />
+      <h:inputText id="yayinYili" value="#{filmBean.yayinYili}" validatorMessage="Yayın yılı girin.">
+      <f:validateRequired/>
+      </h:inputText>
+      <h:message for="yayinYili" style="color:red"/>
+      
+      <h:outputText value="AÇIKLAMA" />
+      <h:inputText id="aciklama" value="#{filmBean.aciklama}" validatorMessage="Açıklama girin.">
+      <f:validateRequired/>
+      </h:inputText>
+      <h:message for="aciklama" style="color:red"/>
+      
+      <h:outputText value="MEDYA" />
+      <h:inputText id="medya" value="#{filmBean.medya}" validatorMessage="Medya girin.">
+      <f:validateRequired/>
+      </h:inputText>
+      <h:message for="medya" style="color:red"/>
+      
+      <f:facet name="footer"> 
+      <h:commandButton action="#{filmBean.filmDuzenle()}" value="DEĞİŞTİR" type="submit" />
+      </f:facet>
+      
+      </h:panelGrid>
+      
+      </h:form>
+      
+      </h:body>
+</html>

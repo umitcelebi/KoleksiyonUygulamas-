@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#index.xhtml" PATH="/index.xhtml"
+  SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#index.xhtml:0" NAME="item"
+   PATH="/index.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="girisBasarili:#{kullaniciBean.girisYap()}:#anasayfa.xhtml"
+    NAME="output" PATH="/anasayfa.xhtml" TARGET="rules:#anasayfa.xhtml"
+    TITLE="#{kullaniciBean.girisYap()}:girisBasarili" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="girisBasarisiz:#{kullaniciBean.girisYap()}:#index.xhtml"
+    NAME="output1" PATH="/index.xhtml" TARGET="rules:#index.xhtml"
+    TITLE="#{kullaniciBean.girisYap()}:girisBasarisiz" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#anasayfa.xhtml" PATH="/anasayfa.xhtml"
+  SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#duzenle.xhtml" PATH="/duzenle.xhtml"
+  SHAPE="32,161,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#duzenle.xhtml:0" NAME="item"
+   PATH="/duzenle.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="guncellemeBasarili:#{filmBean.filmDuzenle()}:#anasayfa.xhtml"
+    NAME="output" PATH="/anasayfa.xhtml" TARGET="rules:#anasayfa.xhtml"
+    TITLE="#{filmBean.filmDuzenle()}:guncellemeBasarili" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="guncellemeBasarisiz:#{filmBean.filmDuzenle()}:#duzenle.xhtml"
+    NAME="output1" PATH="/duzenle.xhtml" TARGET="rules:#duzenle.xhtml"
+    TITLE="#{filmBean.filmDuzenle()}:guncellemeBasarisiz" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+</PROCESS>
