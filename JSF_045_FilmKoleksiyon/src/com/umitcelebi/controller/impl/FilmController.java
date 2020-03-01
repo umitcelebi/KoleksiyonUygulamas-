@@ -4,10 +4,15 @@ import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import com.umitcelebi.controller.IFilmController;
 import com.umitcelebi.dao.impl.FilmDaoImpl;
+import com.umitcelebi.dao.impl.OyuncuDaoImpl;
 import com.umitcelebi.model.Film;
+import com.umitcelebi.model.Oyuncu;
 
 @ManagedBean(name = "filmBean")
 @SessionScoped
@@ -19,7 +24,7 @@ public class FilmController implements IFilmController {
 	private String aciklama;
 	private String medya;
 	private Film film;
-	
+	private int oyuncuID;
 	//------------------------------------
 	public boolean detay=false;
 	public boolean isDetay() {
@@ -29,7 +34,9 @@ public class FilmController implements IFilmController {
 		this.detay = detay;
 	}
 	//-----------------------------------
+	
 	FilmDaoImpl dao=new FilmDaoImpl();
+	OyuncuDaoImpl oyuncuDao=new OyuncuDaoImpl();
 	//------------------------------------
 	public int getFilmId() {
 		return filmId;
@@ -73,8 +80,15 @@ public class FilmController implements IFilmController {
 	public void setFilm(Film film) {
 		this.film = film;
 	}
+	public int getOyuncuID() {
+		return oyuncuID;
+	}
+	public void setOyuncuID(int oyuncuID) {
+		this.oyuncuID = oyuncuID;
+	}
 
 	//-----------------------------------------------------
+	
 	
 	@Override
 	public void FilmEkle() {
@@ -97,17 +111,14 @@ public class FilmController implements IFilmController {
 	@Override
 	public ArrayList<Film> filmler() {
 		
-		if(filmListele) {
-			return (ArrayList<Film>) dao.filmler();
-			
-		}else if(IsmeGoreAra){
+		if(IsmeGoreAra){
 			return filmAraN();
 			
 		}else if(tureGoreAra){
 			return filmAraT();
 			
 		}else {
-			return null;
+			return (ArrayList<Film>) dao.filmler();
 		}
 	}
 	@Override
@@ -157,20 +168,33 @@ public class FilmController implements IFilmController {
 	public ArrayList<Film> filmAraT() {
 		return (ArrayList<Film>) dao.filmAraT(filmTur);
 	}
-	//-----------------------------------------------------
-	public boolean IsmeGoreAra,filmListele,tureGoreAra;
 	
+	
+	
+	
+	//-----------------------------------------------------
+	
+	
+	
+	public boolean IsmeGoreAra,filmEkle,tureGoreAra,oyuncuEkle;
+	
+	public boolean isOyuncuEkle() {
+		return oyuncuEkle;
+	}
+	public void setOyuncuEkle(boolean oyuncuEkle) {
+		this.oyuncuEkle = oyuncuEkle;
+	}
 	public boolean isIsmeGoreAra() {
 		return IsmeGoreAra;
 	}
 	public void setIsmeGoreAra(boolean ismeGoreAra) {
 		IsmeGoreAra = ismeGoreAra;
 	}
-	public boolean isFilmListele() {
-		return filmListele;
+	public boolean isFilmEkle() {
+		return filmEkle;
 	}
-	public void setFilmListele(boolean filmListele) {
-		this.filmListele = filmListele;
+	public void setFilmEkle(boolean filmEkle) {
+		this.filmEkle = filmEkle;
 	}
 	public boolean isTureGoreAra() {
 		return tureGoreAra;
@@ -179,24 +203,76 @@ public class FilmController implements IFilmController {
 		this.tureGoreAra = tureGoreAra;
 	}
 	@Override
-	public void filmListele() {
-		filmListele=true;
+	public void filmEkleF() {
+		oyuncuEkle=false;
+		filmEkle=true;
+		IsmeGoreAra=false;
+		tureGoreAra=false;
+	}
+	@Override
+	public void oyuncuEkleF() {
+		oyuncuEkle=true;
+		filmEkle=false;
 		IsmeGoreAra=false;
 		tureGoreAra=false;
 	}
 	@Override
 	public void ismeGoreAra() {
-		filmListele=false;
+		oyuncuEkle=false;
+		filmEkle=false;
 		IsmeGoreAra=true;
 		tureGoreAra=false;
 	}
 	@Override
 	public void tureGoreAra() {
-		filmListele=false;
+		oyuncuEkle=false;
+		filmEkle=false;
 		IsmeGoreAra=false;
 		tureGoreAra=true;
 	}
+	@Override
+	public void filmOyuncuEkle() {
+		
+		dao.filmOyuncuEkle(filmId, oyuncuID);;
+	}
+	@Override
+	public void filmOyuncuKaldir() {
+		dao.filmOyuncuKaldir(filmId, oyuncuID);
+	}
 	
-	
+	public ArrayList<Oyuncu>tumBilgiler(){
+		return (ArrayList<Oyuncu>) dao.filmTumOyuncular(filmId);
+	}
+	@Override
+	public Film filmTumBilgiler(int ID) {
+		
+		return dao.filmTumBilgiler(ID);
+	}
+	@Override
+	public String cikisYap() {
+		FacesContext context=FacesContext.getCurrentInstance();
+		ExternalContext externalContext=context.getExternalContext();
+		
+		HttpServletRequest request=(HttpServletRequest) externalContext.getRequest();
+		
+		request.getSession(false).invalidate();
+		
+		System.out.println("tebrikler çýkýþ baþarýlý");
+		
+		return "index?faces-redirect=true";
+	}
+	@Override
+	public String anaSayfa() {
+		FacesContext context=FacesContext.getCurrentInstance();
+		ExternalContext externalContext=context.getExternalContext();
+		
+		HttpServletRequest request=(HttpServletRequest) externalContext.getRequest();
+		
+		request.getSession(false).invalidate();
+		
+		System.out.println("tebrikler çýkýþ baþarýlý");
+		
+		return "anasayfa?faces-redirect=true";
+	}
 	
 }

@@ -16,5 +16,7 @@
   
   <mapping class="com.umitcelebi.model.Kullanici"/>
   <mapping class="com.umitcelebi.model.Film"/>
+  <mapping class="com.umitcelebi.model.Oyuncu"/>
+  
  </session-factory>
 </hibernate-configuration>

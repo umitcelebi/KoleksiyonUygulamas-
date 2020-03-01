@@ -56,5 +56,37 @@
       
       </h:form>
       
+      
+      <hr/>
+      <h:form>
+      <h:outputText value="OYUNCULAR" /><br/>
+      <h:selectOneListbox value="#{filmBean.oyuncuID}">
+      <f:selectItems value="#{filmBean.tumBilgiler()}" var="b" itemLabel="#{b.oyuncuAdi}" itemValue="#{b.oyuncuId}"/>
+      </h:selectOneListbox>
+      <h:commandButton action="#{filmBean.filmOyuncuKaldir()}" value="Oyuncuyu Kaldır" />
+      </h:form>
+      
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+      <h:form>
+      <h:outputText value="OYUNCU EKLE" /> <br/>
+      <h:selectOneMenu value="#{filmBean.oyuncuID}">
+      <f:selectItem noSelectionOption="true"/>
+      <f:selectItems value="#{oyuncuBean.oyuncuList()}" var="o" itemLabel="#{o.oyuncuAdi}" itemValue="#{o.oyuncuId}"/>
+      </h:selectOneMenu>
+      <h:commandButton action="#{filmBean.filmOyuncuEkle()}" value="Oyuncuyu Ekle" />
+      </h:form>
+      
+      <hr/>
+      
+     <h:form>
+     <h:commandButton action="#{filmBean.cikisYap()}" value="ÇIKIŞ YAP" />
+     
+     <h:commandButton action="#{filmBean.anaSayfa()}" value="ANA SAYFA" />
+     </h:form>
+      
+      
+      
+      
       </h:body>
 </html>

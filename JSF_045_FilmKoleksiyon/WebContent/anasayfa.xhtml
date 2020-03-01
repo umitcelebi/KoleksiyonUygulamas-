@@ -13,9 +13,22 @@
       
       
       <h:body>
+      				<!-- ////////////////////  OYUNCU EKLE ////////////////////// -->
+      <h:form rendered="#{filmBean.oyuncuEkle}">
       
-      <h:form>
-      				<!-- ////////////////////  FİLM EKLE ////////////////////// -->
+      <h:panelGrid columns="2" border="2">
+      <h:outputText value="Oyuncu Adı: " />
+      <h:inputText value="#{oyuncuBean.oyuncuAdi}" />
+      <f:facet name="footer">
+      <h:commandButton action="#{oyuncuBean.oyuncuEkle()}" value="Oyuncu Oluştur" />
+      </f:facet>
+      </h:panelGrid>
+      
+      </h:form>
+      
+      					<!-- ////////////////////  FİLM EKLE ////////////////////// -->
+      <h:form rendered="#{filmBean.filmEkle}">
+      
       <h:panelGrid columns="5" border="1">
       
       <f:facet name="header">FİLM EKLE</f:facet>
@@ -37,11 +50,11 @@
       </f:facet>
       
       </h:panelGrid>
+      </h:form>
       
+      				<!-- ////////////////  LİSTELEME - ARAMA KISMI //////////////////////// -->
+      <h:form>
       
-      
-    				 <!-- ////////////////  LİSTELEME - ARAMA KISMI //////////////////////// -->
-    				 
     	<h:panelGrid columns="2">
     	<h:outputText value="Film Adı" />
     	<h:inputText value="#{filmBean.filAdi}" />
@@ -50,17 +63,20 @@
     	
     	<f:facet name="footer">
     	<h:panelGroup>
-    	<h:commandButton styleClass="button buttonKirmizi" action="#{filmBean.filmListele()}" value="TÜM FILMLER"/>
+    	<h:commandButton styleClass="button buttonKirmizi" action="#{filmBean.filmEkleF()}" value="FILMLER EKLE"/>
+    	<h:commandButton styleClass="button buttonKirmizi" action="#{filmBean.oyuncuEkleF()}" value="OYUNCU EKLE"/>
      	<h:commandButton styleClass="button buttonKirmizi" action="#{filmBean.ismeGoreAra()}" value="ISME GORE ARA"/>
      	<h:commandButton styleClass="button buttonKirmizi" action="#{filmBean.tureGoreAra()}" value="TURE GORE ARA"/>
+     	<h:commandButton styleClass="button" action="#{filmBean.cikisYap()}" value="ÇIKIŞ YAP"/>
     	</h:panelGroup>
     	</f:facet>
     	</h:panelGrid>			 
+      </h:form>
       
-      
-      		
-      		<!-- ////////////////  DATATABLE - TUM FILMLER //////////////////////// -->
-      		
+     
+      					<!-- ////////////////  DATATABLE - TUM FILMLER //////////////////////// -->
+      <h:form>
+      	
       <h:dataTable value="#{filmBean.filmler()}" 
       				var="f"
       				styleClass="table"
@@ -94,13 +110,17 @@
       
       <h:column>
       <f:facet name="header">DETAY</f:facet>
-      <h:commandButton action="#{filmBean.filmDetay(f)}" value="DETAY" />
+      <h:commandButton id="btnDetay" action="#{filmBean.filmDetay(f)}" value="DETAY" />
       </h:column>
       
       </h:dataTable>
+      </h:form>
+    
       
       					<!-- ////////////////  DETAY KISMI //////////////////////// -->
-      <h:panelGrid columns="2" rendered="false">
+      <h:form id="detay" rendered="#{filmBean.detay}">
+      
+      <h:panelGrid columns="2" >
       <h:outputText value="FİLM ID: " />
       <h:outputLabel value="#{filmBean.filmId}" /> 
       <h:outputText value="FİLM ADI: " />
@@ -114,11 +134,12 @@
       <h:outputText value="AÇIKLAMA: " />
       <h:outputLabel value="#{filmBean.aciklama}" />
       <h:outputLabel value="OYUNCULAR: " />
-      <h:outputLabel value="" />
+      <h:selectOneListbox>
+      <f:selectItems value="#{filmBean.tumBilgiler()}" var="o" itemLabel="#{o.oyuncuAdi}"/>
+      </h:selectOneListbox>
       </h:panelGrid>
       		
       </h:form>
-      
       
       
       </h:body>
