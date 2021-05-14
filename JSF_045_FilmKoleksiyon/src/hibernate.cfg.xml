@@ -4,7 +4,7 @@
 <hibernate-configuration>
  <session-factory>
   <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-  <property name="hibernate.connection.password">Umit2580</property>
+  <property name="hibernate.connection.password">Passsword</property>
   <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/filmuygulama?useUnicode=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=Turkey</property>
   <property name="hibernate.connection.username">root</property>
   
